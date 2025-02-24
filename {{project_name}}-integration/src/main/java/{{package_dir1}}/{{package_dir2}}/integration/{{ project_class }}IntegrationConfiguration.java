@@ -7,5 +7,5 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan
 @Configuration
 @PropertySource("classpath:{cookiecutter.slug}-integration.properties")
-public class {{ cookiecutter.project_class }}IntegrationConfiguration {
+public class {{ project_class }}IntegrationConfiguration {
 }
