@@ -8,6 +8,7 @@ nacos_data_id = { description = "The dir of the package", default = "com/coraool
 package_dir1 = { description = "The dir of the package", default = "com/coraool/digiplus" }
 package_dir2 = { description = "The dir of the package", default = "com/coraool/digiplus" }
 package_dir3 = { description = "The dir of the package", default = "com/coraool/digiplus" }
+package_dir4 = { description = "The dir of the package", default = "com/coraool/digiplus" }
 
 
 [template.placeholders]
@@ -20,3 +21,4 @@ nacos_data_id = { type = "string", prompt = "Enter the package dir" }
 package_dir1 = { type = "string", prompt = "Enter the package dir" }
 package_dir2 = { type = "string", prompt = "Enter the package dir" }
 package_dir3 = { type = "string", prompt = "Enter the package dir" }
+package_dir4 = { type = "string", prompt = "Enter the package dir" }
