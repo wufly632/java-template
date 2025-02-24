@@ -1,0 +1,9 @@
+rootProject.name = '{{cookiecutter.project_name}}'
+include '{{cookiecutter.project_name}}-api'
+include '{{cookiecutter.project_name}}-commons'
+include '{{cookiecutter.project_name}}-core'
+include '{{cookiecutter.project_name}}-integration'
+include '{{cookiecutter.project_name}}-repository'
+include '{{cookiecutter.project_name}}-tools'
+include '{{cookiecutter.project_name}}-contract'
+

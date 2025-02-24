@@ -1,0 +1,60 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="simple" targetRuntime="MyBatis3">
+
+        <plugin type="com.coraool.bingoplus.dgug.dashboard.tools.plugins.LombokPlugin"></plugin>
+        <!--        <plugin type="com.coraool.bingoplus.dgug.dashboard.tools.plugins.BatchInsertPlugin"></plugin>-->
+
+        <commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator">
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://mysql-api.coraool.site:3306/audience_service?useAffectedRows=true"
+                        userId="root"
+                        password="DB@Mysql@1234"
+        />
+
+        <javaModelGenerator targetPackage="com.coraool.bingoplus.dgug.dashboard.repository.entity.rule"
+                            targetProject="dgug-dashboard-repository/src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mappers" targetProject="dgug-dashboard-repository/src/main/resources"/>
+
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.coraool.bingoplus.dgug.dashboard.repository.mybatis.mapper.rule"
+                             targetProject="dgug-dashboard-repository/src/main/java"/>
+
+
+        <table tableName="template">
+        </table>
+
+        <!--        <table tableName="user_info">-->
+        <!--            <columnOverride column="gender" javaType="Integer"/>-->
+        <!--            <columnOverride column="admin" javaType="java.lang.Boolean"/>-->
+        <!--            <columnOverride column="verification_status" javaType="java.lang.Boolean"/>-->
+        <!--            <columnOverride column="role_ids" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+        <!--            <columnOverride column="avatar" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+        <!--        </table>-->
+
+
+        <!--        <table tableName="daily_overview_metrics">-->
+        <!--        </table>-->
+        <!--        <table tableName="monthly_overview_metrics">-->
+        <!--        </table>-->
+        <!--        <table tableName="overview_metrics">-->
+        <!--        </table>-->
+        <!--        <table tableName="bi_ads_dg_pay_chnl_activation_dm">-->
+        <!--        </table>-->
+        <!--        <table tableName="bi_ads_dg_pay_chnl_engagement_dm">-->
+        <!--        </table>-->
+        <!--        <table tableName="bi_ads_dg_pay_chnl_install_dm">-->
+        <!--        </table>-->
+        <!--        <table tableName="bi_ads_dg_pay_chnl_reinstall_dm">-->
+        <!--        </table>-->
+
+
+    </context>
+</generatorConfiguration>

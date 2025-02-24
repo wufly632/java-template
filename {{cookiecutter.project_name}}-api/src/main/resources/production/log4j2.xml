@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Loghub name="Loghub"
+                project="coraool-production"
+                logStore="${env:CORAOOL_APP_NAME}"
+                endpoint="${env:SLS_END_POINT}"
+                accessKeyId="${env:SLS_ACCESS_KEY_ID}"
+                accessKeySecret="${env:SLS_ACCESS_KEY_SECRET}"
+                maxBlockMs="0"
+                ioThreadCount="8"
+                timeZone="Asia/Shanghai"
+                ignoreExceptions="true">
+            <PatternLayout pattern="%d %-5level [%thread] %X{X-CORA-TRACE-ID} %logger{0}: %msg"/>
+        </Loghub>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache.catalina.startup.DigesterFactory" level="error"/>
+        <Logger name="org.apache.catalina.util.LifecycleBase" level="error"/>
+        <Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn"/>
+        <Logger name="org.apache.sshd.common.util.SecurityUtils" level="warn"/>
+        <Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn"/>
+        <Logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="error"/>
+        <Logger name="org.hibernate.validator.internal.util.Version" level="warn"/>
+        <Logger name="org.springframework.boot.actuate.endpoint.jmx" level="warn"/>
+        <Root level="info">
+            <AppenderRef ref="Loghub"/>
+        </Root>
+    </Loggers>
+</Configuration>
+

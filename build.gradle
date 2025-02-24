@@ -1,0 +1,232 @@
+ext {
+
+    env = System.getProperty("env", "development")
+}
+buildscript {
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:3.2.11")
+        classpath("io.spring.gradle:dependency-management-plugin:1.1.6")
+    }
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+        maven {
+            name = 'coraoolReleaseRepository'
+            credentials(PasswordCredentials)
+            url 'https://packages.aliyun.com/maven/repository/2407493-release-eHGMxq'
+        }
+        maven {
+            name = 'coraoolSnapshotRepository'
+            credentials(PasswordCredentials)
+            url 'https://packages.aliyun.com/maven/repository/2407493-snapshot-7q883D'
+        }
+    }
+    group = 'com.coraool.bingoplus'
+    version = '0.0.1-SNAPSHOT'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
+
+    compileJava {
+        sourceCompatibility = 17
+        targetCompatibility = 17
+        options.compilerArgs << "-parameters"
+        options.encoding = 'UTF-8'
+    }
+    compileTestJava {
+        sourceCompatibility = 17
+        targetCompatibility = 17
+        options.compilerArgs << "-parameters"
+        options.encoding = 'UTF-8'
+    }
+    sourceSets {
+
+        main {
+            resources {
+                srcDirs = ["src/main/resources/base", "src/main/resources/$env"]
+            }
+        }
+        test {
+            resources {
+                srcDirs = ["src/test/resources/base", "src/test/resources/$env"]
+            }
+        }
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+    }
+
+
+    dependencies {
+        if (project.name != '{{cookiecutter.project_name}}-contract') {
+            implementation 'org.springframework.boot:spring-boot-starter-actuator'
+            implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+            implementation 'org.springframework.boot:spring-boot-starter-web'
+            implementation 'org.springframework.boot:spring-boot-starter-validation'
+            implementation 'org.springframework.boot:spring-boot-starter-aop'
+            implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+            implementation 'io.micrometer:micrometer-registry-prometheus'
+
+            implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+            implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.7'
+
+
+
+            implementation "org.apache.commons:commons-lang3"
+            implementation "org.apache.commons:commons-collections4:4.4"
+            implementation "commons-io:commons-io:2.13.0"
+            implementation "com.google.guava:guava:32.1.1-jre"
+            implementation "com.squareup.okhttp3:okhttp:4.9.3"
+            implementation "com.alibaba:fastjson:2.0.28"
+
+            implementation 'org.apache.dubbo:dubbo-registry-nacos:3.3.0'
+            implementation 'org.apache.dubbo:dubbo-spring-boot-starter:3.3.0'
+            implementation 'org.apache.dubbo:dubbo-spring-boot-observability-starter:3.2.7'
+            implementation 'com.alibaba.nacos:nacos-client:2.4.3'
+            implementation 'com.alibaba.boot:nacos-config-spring-boot-starter:0.3.0-RC'
+            implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2023.0.1.0'
+            implementation 'com.alibaba:druid-spring-boot-starter:1.2.17'
+
+            implementation 'net.logstash.logback:logstash-logback-encoder:6.6'
+            implementation 'com.alibaba:transmittable-thread-local:2.14.2'
+            implementation 'ma.glasnost.orika:orika-core:1.5.4'
+
+            implementation 'org.apache.kafka:kafka-clients:2.8.1'
+            implementation 'org.apache.logging.log4j:log4j-api:2.21.1'
+            implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
+            implementation 'com.coraool.commons:coraool-session-kit:0.0.3'
+
+            runtimeOnly 'com.h2database:h2'
+            runtimeOnly 'com.mysql:mysql-connector-j'
+        }
+
+        implementation 'com.coraool.commons:commons-all-in-one:0.0.22'
+        
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+    configurations.all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+}
+
+
+project(":{{cookiecutter.project_name}}-api") {
+    dependencies {
+        implementation project(":{{cookiecutter.project_name}}-repository")
+        implementation project(":{{cookiecutter.project_name}}-commons")
+        implementation project(":{{cookiecutter.project_name}}-core")
+        implementation project(":{{cookiecutter.project_name}}-integration")
+        implementation project(":{{cookiecutter.project_name}}-contract")
+        implementation 'org.springframework.session:spring-session-data-redis'
+    }
+}
+project(":{{cookiecutter.project_name}}-commons") {
+    dependencies {
+        implementation "com.aliyun.openservices:aliyun-log-log4j2-appender:0.1.12"
+        implementation "com.google.protobuf:protobuf-java:2.5.0"
+        implementation "org.springframework.boot:spring-boot-starter-log4j2"
+    }
+
+}
+
+project(":{{cookiecutter.project_name}}-contract") {
+    apply plugin: 'maven-publish'
+    version = '0.0.3'
+    compileJava {
+        sourceCompatibility = 8
+        targetCompatibility = 8
+        options.compilerArgs << "-parameters"
+        options.encoding = 'UTF-8'
+    }
+    compileTestJava {
+        sourceCompatibility = 8
+        targetCompatibility = 8
+        options.compilerArgs << "-parameters"
+        options.encoding = 'UTF-8'
+    }
+    afterEvaluate {
+        publishing {
+            publications {
+                plugin(MavenPublication) {
+                    from components.java
+                }
+            }
+            repositories {
+                maven {
+                    def releasesRepoUrl = 'https://packages.aliyun.com/maven/repository/2407493-release-eHGMxq'
+                    def snapshotsRepoUrl = 'https://packages.aliyun.com/maven/repository/2407493-snapshot-7q883D'
+                    url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                    name = 'coraoolReleaseRepository'
+                    credentials(PasswordCredentials)
+                }
+            }
+        }
+    }
+    dependencies {}
+}
+
+project(":{{cookiecutter.project_name}}-core") {
+    dependencies {
+        implementation project(":{{cookiecutter.project_name}}-repository")
+        implementation project(":{{cookiecutter.project_name}}-commons")
+        implementation project(":{{cookiecutter.project_name}}-integration")
+        implementation project(":{{cookiecutter.project_name}}-contract")
+        implementation 'org.thymeleaf:thymeleaf:3.1.2.RELEASE'
+    }
+}
+
+
+project(":{{cookiecutter.project_name}}-integration") {
+    dependencies {
+        implementation project(":{{cookiecutter.project_name}}-commons")
+        implementation "com.aliyun.odps:odps-sdk-core:0.45.0-public"
+    }
+
+}
+
+project(":{{cookiecutter.project_name}}-repository") {
+    dependencies {
+        implementation project(":{{cookiecutter.project_name}}-commons")
+    }
+}
+
+
+project(":{{cookiecutter.project_name}}-tools") {
+    dependencies {
+        implementation 'org.mybatis.generator:mybatis-generator-core:1.4.2'
+        implementation 'com.alibaba:druid:1.2.17'
+    }
+}
