@@ -80,7 +80,7 @@ subprojects {
 
 
     dependencies {
-        if (project.name != '{{cookiecutter.project_name}}-contract') {
+        if (project.name != '{{project_name}}-contract') {
             implementation 'org.springframework.boot:spring-boot-starter-actuator'
             implementation 'org.springframework.boot:spring-boot-starter-jdbc'
             implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -143,17 +143,17 @@ subprojects {
 }
 
 
-project(":{{cookiecutter.project_name}}-api") {
+project(":{{project_name}}-api") {
     dependencies {
-        implementation project(":{{cookiecutter.project_name}}-repository")
-        implementation project(":{{cookiecutter.project_name}}-commons")
-        implementation project(":{{cookiecutter.project_name}}-core")
-        implementation project(":{{cookiecutter.project_name}}-integration")
-        implementation project(":{{cookiecutter.project_name}}-contract")
+        implementation project(":{{project_name}}-repository")
+        implementation project(":{{project_name}}-commons")
+        implementation project(":{{project_name}}-core")
+        implementation project(":{{project_name}}-integration")
+        implementation project(":{{project_name}}-contract")
         implementation 'org.springframework.session:spring-session-data-redis'
     }
 }
-project(":{{cookiecutter.project_name}}-commons") {
+project(":{{project_name}}-commons") {
     dependencies {
         implementation "com.aliyun.openservices:aliyun-log-log4j2-appender:0.1.12"
         implementation "com.google.protobuf:protobuf-java:2.5.0"
@@ -162,7 +162,7 @@ project(":{{cookiecutter.project_name}}-commons") {
 
 }
 
-project(":{{cookiecutter.project_name}}-contract") {
+project(":{{project_name}}-contract") {
     apply plugin: 'maven-publish'
     version = '0.0.3'
     compileJava {
@@ -198,33 +198,33 @@ project(":{{cookiecutter.project_name}}-contract") {
     dependencies {}
 }
 
-project(":{{cookiecutter.project_name}}-core") {
+project(":{{project_name}}-core") {
     dependencies {
-        implementation project(":{{cookiecutter.project_name}}-repository")
-        implementation project(":{{cookiecutter.project_name}}-commons")
-        implementation project(":{{cookiecutter.project_name}}-integration")
-        implementation project(":{{cookiecutter.project_name}}-contract")
+        implementation project(":{{project_name}}-repository")
+        implementation project(":{{project_name}}-commons")
+        implementation project(":{{project_name}}-integration")
+        implementation project(":{{project_name}}-contract")
         implementation 'org.thymeleaf:thymeleaf:3.1.2.RELEASE'
     }
 }
 
 
-project(":{{cookiecutter.project_name}}-integration") {
+project(":{{project_name}}-integration") {
     dependencies {
-        implementation project(":{{cookiecutter.project_name}}-commons")
+        implementation project(":{{project_name}}-commons")
         implementation "com.aliyun.odps:odps-sdk-core:0.45.0-public"
     }
 
 }
 
-project(":{{cookiecutter.project_name}}-repository") {
+project(":{{project_name}}-repository") {
     dependencies {
-        implementation project(":{{cookiecutter.project_name}}-commons")
+        implementation project(":{{project_name}}-commons")
     }
 }
 
 
-project(":{{cookiecutter.project_name}}-tools") {
+project(":{{project_name}}-tools") {
     dependencies {
         implementation 'org.mybatis.generator:mybatis-generator-core:1.4.2'
         implementation 'com.alibaba:druid:1.2.17'
