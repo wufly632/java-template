@@ -3,9 +3,11 @@ project_name = { description = "The name of the project", default = "my_project"
 package_name = { description = "The name of the package", default = "com.coraool.digiplus" }
 project_class = { description = "The name of the project class", default = "Dgug" }
 server_port = { description = "The port of the server", default = "8080" }
+package_dir = { description = "The dir of the package", default = "com/coraool/digiplus" }
 
 [template.placeholders]
 project_name = { type = "string", prompt = "Enter the project name" }
 package_name = { type = "string", prompt = "Enter the package name" }
 project_class = { type = "string", prompt = "Enter the project class" }
 server_port = { type = "string", prompt = "Enter the server port" }
+package_dir = { type = "string", prompt = "Enter the package dir" }
