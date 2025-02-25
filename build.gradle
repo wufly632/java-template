@@ -107,7 +107,6 @@ subprojects {
             implementation 'com.alibaba.nacos:nacos-client:2.4.3'
             implementation 'com.alibaba.boot:nacos-config-spring-boot-starter:0.3.0-RC'
             implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2023.0.1.0'
-            implementation 'com.alibaba:druid-spring-boot-starter:1.2.17'
 
             implementation 'net.logstash.logback:logstash-logback-encoder:6.6'
             implementation 'com.alibaba:transmittable-thread-local:2.14.2'
@@ -227,6 +226,5 @@ project(":{{project_name}}-repository") {
 project(":{{project_name}}-tools") {
     dependencies {
         implementation 'org.mybatis.generator:mybatis-generator-core:1.4.2'
-        implementation 'com.alibaba:druid:1.2.17'
     }
 }
