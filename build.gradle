@@ -108,6 +108,7 @@ subprojects {
             implementation 'com.alibaba.boot:nacos-config-spring-boot-starter:0.3.0-RC'
             implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2023.0.1.0'
 
+            implementation 'com.aliyun.openservices:aliyun-log:0.6.75'
             implementation 'net.logstash.logback:logstash-logback-encoder:6.6'
             implementation 'com.alibaba:transmittable-thread-local:2.14.2'
             implementation 'ma.glasnost.orika:orika-core:1.5.4'
